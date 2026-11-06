@@ -23,3 +23,15 @@
 }
 /* Match the phone footer’s two links in scale. */
 @media(max-width:560px){.story-footer .linkedin{font-size:16px;padding:8px 10px;border-radius:8px;box-shadow:0 2px 8px #26020d55}}
+
+/* Scale the desktop hero typography together; keep phone sizing intact. */
+@media(min-width:801px){.hero h1{font-size:clamp(56px,7.92vw,149px)}.hero-subtitle{font-size:clamp(17.6px,2.04vw,38.4px)}.tagline{font-size:clamp(12.8px,1.416vw,26.4px)}}
+.projects article{grid-template-columns:60px 1fr 1fr;align-items:start}
+.projects article>.project-number{grid-column:1;grid-row:auto}
+.project-heading{grid-column:2}
+.projects .project-heading strong{display:block;margin-top:12px;line-height:1.4}
+.project-copy{grid-column:3}
+.project-copy p+p{margin-top:18px}
+.count-value{font-variant-numeric:tabular-nums;display:inline-block;min-width:5ch}
+.count-value[data-prefix]{min-width:6ch}
+@media(max-width:800px){.projects article{grid-template-columns:30px 1fr}.projects .project-copy{grid-column:2}.projects .project-heading strong{margin-top:10px}}
