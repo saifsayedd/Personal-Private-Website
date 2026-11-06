@@ -35,3 +35,11 @@
 .count-value{font-variant-numeric:tabular-nums;display:inline-block;min-width:5ch}
 .count-value[data-prefix]{min-width:6ch}
 @media(max-width:800px){.projects article{grid-template-columns:30px 1fr}.projects .project-copy{grid-column:2}.projects .project-heading strong{margin-top:10px}}
+
+/* Project results share the headline typeface at a smaller scale. */
+.projects .project-heading strong{font-family:Inter,Arial,sans-serif;font-size:26px;font-weight:700;letter-spacing:-.05em;line-height:1.35}
+.count-value,.count-value[data-prefix]{min-width:0;font-variant-numeric:tabular-nums;white-space:nowrap}
+.digit-window{display:inline-block;width:.65em;height:1em;overflow:hidden;vertical-align:-.1em;line-height:1}
+.digit-reel{display:flex;flex-direction:column;will-change:transform}
+.digit-cell{display:block;flex:0 0 1em;height:1em;line-height:1;text-align:center}
+@media(max-width:800px){.projects .project-heading strong{font-size:23px}}
