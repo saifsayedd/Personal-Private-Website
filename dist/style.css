@@ -48,3 +48,117 @@
 @media(min-width:561px) and (max-width:800px){
  .hero-figure svg{left:-4vw;width:30vw;height:auto;max-width:none}
 }
+
+/* A pale red halo centered behind the portrait. */
+.hero {
+  /* Increase this duration for a slower drift, or decrease it to speed up. */
+  --hero-drift-duration: 24s;
+  --halo-center-x: 25%;
+  --halo-radius-x: 61%;
+  --halo-radius-y: 64%;
+  --platform-left: 8.1%;
+  --platform-right: 32.1778%;
+  --divider-clearance: clamp(8px, 1vw, 18px);
+  isolation: isolate;
+  background-color: var(--paper);
+  background-image: radial-gradient(
+    ellipse var(--halo-radius-x) var(--halo-radius-y) at var(--halo-center-x) 64%,
+    #f7d5d2 0%,
+    #f8dfdc 30%,
+    #f9efec 64%,
+    var(--paper) 100%
+  );
+  background-size: 115% 110%;
+  background-position: 46% 46%;
+  background-repeat: no-repeat;
+  animation: hero-color-drift var(--hero-drift-duration) ease-in-out infinite;
+}
+
+@keyframes hero-color-drift {
+  0%, 100% { background-position: 46% 46%; }
+  25% { background-position: 65% 32%; }
+  50% { background-position: 52% 64%; }
+  75% { background-position: 30% 52%; }
+}
+
+/* Let the pastel wash show through the portrait artwork’s paper backdrop. */
+.hero-figure svg {
+  mix-blend-mode: darken;
+}
+
+/* Draw two divider segments with a clear gap at the platform edges. */
+.hero::after {
+  --left-stop: max(0%, calc(var(--platform-left) - var(--divider-clearance)));
+  --right-start: calc(var(--platform-right) + var(--divider-clearance));
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 2px;
+  pointer-events: none;
+  background: linear-gradient(to right,
+    #c2c0bb 0 var(--left-stop),
+    transparent var(--left-stop) var(--right-start),
+    #c2c0bb var(--right-start) 100%);
+}
+
+@media (max-width: 800px) {
+  .hero {
+    --halo-center-x: 19%;
+    --platform-left: 0%;
+    --platform-right: 30%;
+  }
+}
+
+/* The platform spans the entire seam on phones. */
+@media (max-width: 560px) {
+  .hero {
+    --halo-center-x: 50%;
+    --halo-radius-x: 72%;
+    --halo-radius-y: 47%;
+  }
+  .hero::after { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero { animation: none; }
+}
+
+/* Match the two sides of the seam, then fade out before the sketch. */
+.hero,
+.origin {
+  --story-seam-wash: linear-gradient(
+    to right, #f8e6e3 0%, #f9eeeb 48%, var(--paper) 85%
+  );
+}
+
+.hero::before,
+.origin::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset-inline: 0;
+  pointer-events: none;
+  background: var(--story-seam-wash);
+}
+
+.hero::before {
+  bottom: 0;
+  height: 44px;
+  mask-image: linear-gradient(to bottom, transparent, black);
+}
+
+.origin {
+  position: relative;
+  isolation: isolate;
+  --story-fade-depth: min(2.6vw, 50px);
+}
+
+.origin::before {
+  top: 0;
+  height: var(--story-fade-depth);
+  mask-image: linear-gradient(to bottom, black, transparent);
+}
+
+@media (max-width: 800px) {
+  .origin { --story-fade-depth: 28px; }
+}
