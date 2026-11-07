@@ -43,3 +43,8 @@
 .digit-reel{display:flex;flex-direction:column;will-change:transform}
 .digit-cell{display:block;flex:0 0 1em;height:1em;line-height:1;text-align:center}
 @media(max-width:800px){.projects .project-heading strong{font-size:23px}}
+
+/* Match the split-window podium to the 30vw story column. */
+@media(min-width:561px) and (max-width:800px){
+ .hero-figure svg{left:-4vw;width:30vw;height:auto;max-width:none}
+}
